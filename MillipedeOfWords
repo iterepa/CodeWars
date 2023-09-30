@@ -1,0 +1,31 @@
+public class MillipedeOfWords {
+
+    public static boolean check(String[] millipede){
+        String words = "";
+        List<String> list = Arrays.asList(millipede);
+        return solution(list, words);
+    }
+    public static boolean solution(List<String> words, String millipede) {
+        if (words.isEmpty()) {
+            return true;
+        }
+        List<Boolean> results = new ArrayList<>();
+        for (int i = 0; i < words.size(); i++) {
+            String word = words.get(i);
+            List<String> slicedWords = new ArrayList<>(words.subList(0, i));
+            slicedWords.addAll(words.subList(i + 1, words.size()));
+            if (millipede.isEmpty()) {
+                results.add(solution(slicedWords, word));
+            }
+            if (!millipede.isEmpty() && !word.isEmpty() && word.charAt(word.length() - 1) == millipede.charAt(0)) {
+                results.add(solution(slicedWords, word + millipede));
+            } else if (!millipede.isEmpty() && !word.isEmpty() && word.charAt(0) == millipede.charAt(millipede.length() - 1)) {
+                results.add(solution(slicedWords, millipede + word));
+            } else {
+                results.add(false);
+            }
+        }
+        return results.stream().anyMatch(result -> result);
+    }
+
+}
