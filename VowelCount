@@ -1,0 +1,11 @@
+public class VowelCount {
+   public static int getCount(String str) {
+        int res = 0;
+        for(char c : str.toCharArray()) {
+            if (c == 'a'|| c == 'o'|| c == 'e'|| c == 'u'|| c == 'i') {
+                res++;
+            }
+        }
+        return res;
+    }
+}
